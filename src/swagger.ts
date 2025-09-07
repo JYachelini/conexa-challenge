@@ -2,11 +2,11 @@ import { INestApplication } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 export const initSwagger = (app: INestApplication) => {
-  const version = process.env.APP_VERSION || '0.0.1'
+  const version = process.env.VERCEL_GIT_PULL_REQUEST_ID
   const config = new DocumentBuilder()
     .setTitle('Conexa StarWars API')
     .setDescription('Documentación swagger para el challenge Conexa.')
-    .setVersion(version)
+    .setVersion(`1.${version}`)
     .build()
 
   const swaggerFactory = () => SwaggerModule.createDocument(app, config)
