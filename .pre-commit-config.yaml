@@ -1,0 +1,40 @@
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks
+        name: gitleaks (detect secrets)
+        stages: [pre-commit]
+
+  - repo: https://github.com/returntocorp/semgrep
+    rev: v1.87.0
+    hooks:
+      - id: semgrep
+        name: semgrep (OWASP baseline)
+        args:
+          - '--config'
+          - 'p/owasp-top-ten'
+          - '--error'
+          - '--exclude'
+          - 'node_modules'
+          - '--exclude'
+          - 'dist'
+          - '--exclude'
+          - 'build'
+          - '--exclude'
+          - '.git'
+        stages: [pre-commit]
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: npx prettier --write
+        language: system
+        types: [ ts ]
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: npx eslint
+        language: system
+        types: [ ts ]
