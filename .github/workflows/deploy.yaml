@@ -19,16 +19,6 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Debug file structure
-        run: |
-          echo "=== Project structure ==="
-          find src -type f -name "*.ts" | grep -E "(database|app)" | sort
-          echo "=== Database module files ==="
-          ls -la src/modules/database/ || echo "database directory not found"
-          ls
-          echo "=== TypeScript config ==="
-          cat tsconfig.json
-
       - name: Install dependencies
         run: npm install --package-lock-only && npm ci
 
