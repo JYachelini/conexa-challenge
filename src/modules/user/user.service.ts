@@ -23,8 +23,9 @@ export class UserService {
     return
   }
 
-  public async updateRefreshToken(id: number, refresh_token_hash: string): Promise<void> {
-    await this.userRepository.update({ id }, { refresh_token_hash })
+  public async updateRefreshToken(id: number, refresh_token_hash: string): Promise<boolean> {
+    const result = await this.userRepository.update({ id }, { refresh_token_hash })
+    return result.affected! > 0
   }
 
   public async findById(id: number, select?: FindOptionsSelect<IUser>): Promise<IUser | null> {

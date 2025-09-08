@@ -5,5 +5,5 @@ export interface IUser extends IBaseEntity {
   username: string
   password: string
   role: EnumRoles
-  refresh_token_hash: string
+  refresh_token_hash: string | null
 }

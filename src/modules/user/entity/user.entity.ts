@@ -15,5 +15,5 @@ export class User extends BaseEntity implements IUser {
   role: EnumRoles
 
   @Column({ type: 'varchar', nullable: true, length: 255 })
-  refresh_token_hash: string
+  refresh_token_hash: string | null
 }

@@ -2,8 +2,8 @@ import { NestFactory } from '@nestjs/core'
 import { AppModule } from './modules/app/app.module'
 import { initSwagger } from './swagger'
 import { ValidationPipe } from '@nestjs/common'
-import { AllExceptionsFilter } from './common/exceptions/exception.handler'
-import { GlobalInterceptor } from './common/interceptor/response.interceptor'
+import { AllExceptionsFilter } from './core/exceptions/exception.handler'
+import { GlobalInterceptor } from './core/interceptor/response.interceptor'
 import { seeder } from './seed'
 
 async function bootstrap() {

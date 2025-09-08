@@ -16,3 +16,9 @@ export class InvalidCredentialsException extends UnauthorizedException {
     super('Invalid credentials.')
   }
 }
+
+export class InvalidLogin extends UnauthorizedException {
+  constructor() {
+    super('Invalid token. Please sign-in again.')
+  }
+}
