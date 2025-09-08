@@ -22,10 +22,11 @@ DB_HOST="localhost"
 STARWARS_API_URL="https://swapi.tech/api/"
 ```
 
-
 Si las variables de entorno no están setteadas, la api devolverá un error al intentar ejecutar.
 
 Docker levanta los contenedores de la DB (PostgreSQL) y la API.
+
+# Levantar API
 
 
 # CI/CD 
