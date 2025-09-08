@@ -135,7 +135,7 @@ export default [
                     selector: 'variable',
                     types: ['boolean'],
                     format: ['snake_case'],
-                    prefix: ['is_', 'has_', 'should_', 'can_', 'did_', 'will_'],
+                    prefix: ['is_', 'has_', 'should_', 'can_', 'did_', 'will_', 'exists'],
                 },
                 {
                     selector: 'property',

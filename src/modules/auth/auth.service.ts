@@ -4,7 +4,7 @@ import { ILoginResponse } from './interfaces/responses/login.interface'
 import { EnumJwtType } from './enum/jwt.enum'
 import { UserService } from '../user/user.service'
 import { hash, verify } from 'argon2'
-import { InvalidCredentialsException } from './exceptions/unauthorized.exception'
+import { InvalidCredentialsException, InvalidLogin } from './exceptions/unauthorized.exception'
 import { IUser } from '../user/interface/user.interface'
 import { EnumRoles } from './enum/roles.enum'
 import { UserNotFound } from '../user/exceptions/user.exceptions'
@@ -29,7 +29,7 @@ export class AuthService {
   private async verifyPassword(username: string, password: string): Promise<IUser> {
     const user = await this.userService.findByUsername(username, { password: true, id: true, role: true })
     if (!user) throw new InvalidCredentialsException()
-    const is_valid_password = this.verifyData(password, user.password)
+    const is_valid_password = await this.verifyData(user.password, password)
     if (!is_valid_password) throw new InvalidCredentialsException()
     return user
   }
@@ -37,7 +37,8 @@ export class AuthService {
   public async refreshToken(id: number, refresh_token: string): Promise<ILoginResponse> {
     const user = await this.userService.findById(id, { id: true, role: true, refresh_token_hash: true })
     if (!user) throw new UserNotFound()
-    const is_valid_token = await this.verifyData(refresh_token, user.refresh_token_hash)
+    if (!user.refresh_token_hash) throw new InvalidLogin()
+    const is_valid_token = await this.verifyData(user.refresh_token_hash, refresh_token)
     if (!is_valid_token) throw new InvalidCredentialsException()
     return await this.generateTokens(user)
   }
@@ -69,7 +70,7 @@ export class AuthService {
     return await hash(dataToHash, { hashLength })
   }
 
-  private async verifyData(data: string, hash: string): Promise<boolean> {
+  private async verifyData(hash: string, data: string): Promise<boolean> {
     return await verify(hash, data)
   }
 }

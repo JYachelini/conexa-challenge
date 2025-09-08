@@ -6,7 +6,7 @@ import { HealthCheckService } from './health-check.service'
 @ApiTags('Health Check')
 export class HealthCheckController {
   constructor(private readonly healtCheckService: HealthCheckService) {}
-  @Get('health-check')
+  @Get('health')
   @HttpCode(HttpStatus.NO_CONTENT)
   healthCheck(): void {
     return

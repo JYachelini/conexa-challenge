@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
 import type { ConfigType } from '@nestjs/config'
 import { JwtService as NestJwtService } from '@nestjs/jwt'
-import { JwtDto } from '../dto/jwt.dto'
+import { IJwtPayload } from '../dto/jwt.dto'
 import { EnumJwtType } from '../enum/jwt.enum'
 import { environments } from '../../config/env.config'
 
@@ -18,7 +18,7 @@ export class JwtService {
       : { secret: this.configService.JWT_REFRESH_SECRET, expiresIn: '7d' }
   }
 
-  public async signToken(payload: JwtDto, type: EnumJwtType): Promise<string> {
+  public async signToken(payload: IJwtPayload, type: EnumJwtType): Promise<string> {
     const { secret, expiresIn } = this.getSignOptions(type)
     return await this.jwtService.signAsync(payload, {
       secret,
@@ -26,7 +26,7 @@ export class JwtService {
     })
   }
 
-  public async verify(token: string, type: EnumJwtType): Promise<JwtDto> {
+  public async verify(token: string, type: EnumJwtType): Promise<IJwtPayload> {
     const { secret } = this.getSignOptions(type)
     return await this.jwtService.verifyAsync(token, {
       secret,
