@@ -4,9 +4,11 @@ import { initSwagger } from './swagger'
 import { ValidationPipe } from '@nestjs/common'
 import { AllExceptionsFilter } from './common/exceptions/exception.handler'
 import { GlobalInterceptor } from './common/interceptor/response.interceptor'
+import { seeder } from './seed'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  seeder(app)
 
   app.useGlobalPipes(
     new ValidationPipe({

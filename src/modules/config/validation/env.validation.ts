@@ -1,5 +1,5 @@
 import { plainToClass } from 'class-transformer'
-import { IsNotEmpty, IsNumber, IsPositive, IsString, validateSync } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsNumberString, IsPositive, IsString, validateSync } from 'class-validator'
 
 export class EnvironmentVariables {
   @IsPositive()
@@ -17,6 +17,26 @@ export class EnvironmentVariables {
   @IsNotEmpty()
   @IsString()
   JWT_REFRESH_SECRET: string
+
+  @IsNotEmpty()
+  @IsNumberString()
+  DB_PORT: string
+
+  @IsNotEmpty()
+  @IsString()
+  DB_HOST: string
+
+  @IsNotEmpty()
+  @IsString()
+  DB_USER: string
+
+  @IsNotEmpty()
+  @IsString()
+  DB_PASSWORD: string
+
+  @IsNotEmpty()
+  @IsString()
+  DB_NAME: string
 }
 
 export const validate = (config: Record<string, unknown>): EnvironmentVariables => {

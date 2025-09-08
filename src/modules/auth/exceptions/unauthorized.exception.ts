@@ -10,3 +10,9 @@ export class UnauthorizedJwtException extends UnauthorizedException {
     super(message)
   }
 }
+
+export class InvalidCredentialsException extends UnauthorizedException {
+  constructor() {
+    super('Invalid credentials.')
+  }
+}
