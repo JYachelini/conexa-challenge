@@ -1,4 +1,4 @@
 import { Reflector } from '@nestjs/core'
-import { EnumRoles } from 'src/modules/auth/enum/roles.enum'
+import { EnumRoles } from '../../../enum/roles.enum'
 
 export const Roles = Reflector.createDecorator<EnumRoles[]>()

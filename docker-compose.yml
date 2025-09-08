@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: starwars-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - starwars-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: starwars-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - starwars-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: npm run start:dev
+
+volumes:
+  postgres_data:
+
+networks:
+  starwars-network:
+    driver: bridge

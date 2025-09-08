@@ -5,8 +5,8 @@ export const initSwagger = (app: INestApplication): void => {
   const version = process.env.APP_VERSION
   const config = new DocumentBuilder()
     .setTitle('Conexa StarWars API')
-    .setDescription('Documentación swagger para el challenge Conexa.')
-    .setVersion(`1.${version}`)
+    .setDescription('Documentación swagger para starwars movies API.')
+    .setVersion(version!)
     .addBearerAuth()
     .build()
 
