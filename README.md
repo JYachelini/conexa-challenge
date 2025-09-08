@@ -1,9 +1,14 @@
 ## Challenge Conexa
 
 # Requisitos para ejecutar
+Con docker:
 * Docker
 * Variables de entorno en .env
 
+Sin Docker:
+* Node (v22)
+* Empaquetador (npm, pnpm)
+* Variables de entorno en .env
 
 Ejemplo .env
 
@@ -27,9 +32,11 @@ Si las variables de entorno no están setteadas, la api devolverá un error al i
 Docker levanta los contenedores de la DB (PostgreSQL) y la API.
 
 # Levantar API
+Son necesarias las variables de entorno. Tambien las variables de la DB tienen que estar correctas. Caso contrario la API no iniciará
 
-
-
+Local
+* `npm install`
+* `npm run start:dev` o `npm run start`
 
 # CI/CD 
 
@@ -47,16 +54,21 @@ Para una aplicación en desarrollo synchronize tendria que estar deshabilitada. 
 Por falta de tiempo y facilitar el desarrollo agregué el synchronize en true.
 
 Al ejectuar la aplicación se genera un usuario con las siguientes credenciales:
+
 ```
 username: 'admin'
 password: 'admin123'
 ```
 
+Igualmente lo encontrarán como ejemplo en el login.
 
 # Testing
 Agregué testing unitario a controllers y services.
 Me quedó pendiente agregar testeos unitarios para Guards, end to end con supertest y algunos componentes en core/
 
-
 # Jira
 Para un poco más de organización, me hice un proyecto en Jira para agregar las tarjetas y llevar un trackeo. También para generar los commits y PR.
+
+
+
+## Scopes
