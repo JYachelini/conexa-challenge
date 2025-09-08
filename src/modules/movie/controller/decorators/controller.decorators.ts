@@ -1,4 +1,4 @@
-import { applyDecorators, Delete, Get, HttpStatus, Patch, Put } from '@nestjs/common'
+import { applyDecorators, Delete, Get, HttpStatus, Patch, Post, Put } from '@nestjs/common'
 import { EnumRoles } from '../../../auth/enum/roles.enum'
 import { Auth } from '../../../auth/decorator/auth.decorator'
 import {
@@ -67,6 +67,7 @@ export function GetMovieById(): any {
 
 export function CreateMovie(): any {
   return applyDecorators(
+    Post(''),
     ProtectedRoutes(HttpStatus.CREATED),
     Auth([EnumRoles.ADMIN]),
     ApiCreatedResponse({ type: MovieResponseDto }),
