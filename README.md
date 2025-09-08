@@ -56,3 +56,7 @@ password: 'admin123'
 # Testing
 Agregué testing unitario a controllers y services.
 Me quedó pendiente agregar testeos unitarios para Guards, end to end con supertest y algunos componentes en core/
+
+
+# Jira
+Para un poco más de organización, me hice un proyecto en Jira para agregar las tarjetas y llevar un trackeo. También para generar los commits y PR.
