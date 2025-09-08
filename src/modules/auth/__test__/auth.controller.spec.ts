@@ -10,9 +10,10 @@ import { JWtAccessGuard } from '../guards/jwt/jwt_access.guard'
 import { RolesGuard } from '../guards/roles/roles.guard'
 import { AuthController } from '../controller/auth.controller'
 import { mockAuthService } from './__mocks__/auth.service.mock'
-import { mockJwtAccessGuard, mockRolesGuard } from './__mocks__/guards.mock'
+import { mockJwtAccessGuard, mockJwtRefreshGuard, mockRolesGuard } from './__mocks__/guards.mock'
 import { mockLoginDto, mockLoginResponse } from './__mocks__/login.mock'
 import { mockRegisterAdminDto, mockRegisterDto } from './__mocks__/register.mock'
+import { JWtRefreshGuard } from '../guards/jwt/jwt_refresh.guard'
 
 describe('AuthController', () => {
   let authController: AuthController
@@ -32,6 +33,8 @@ describe('AuthController', () => {
       .useValue(mockJwtAccessGuard)
       .overrideGuard(RolesGuard)
       .useValue(mockRolesGuard)
+      .overrideGuard(JWtRefreshGuard)
+      .useValue(mockJwtRefreshGuard)
       .compile()
 
     authController = module.get<AuthController>(AuthController)

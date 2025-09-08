@@ -1,6 +1,6 @@
 import { EnumRoles } from '../enum/roles.enum'
 
 export interface IJwtPayload {
-  user_id: number
+  id: number
   role?: EnumRoles
 }

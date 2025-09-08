@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common'
 import { Request, Response } from 'express'
 import { ICustomHttpExceptionResponse, IHttpExceptionResponse } from './exception.interface'
+import { AxiosError } from 'axios'
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -32,10 +33,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
       const errorResponse = exception.getResponse()
       error = (errorResponse as IHttpExceptionResponse).error || exception.cause
       message = (errorResponse as IHttpExceptionResponse).message || exception.message
-      // } else if (exception instanceof AxiosError) {
-      //   status = HttpStatus.BAD_REQUEST
-      //   error = exception.name + ` ${JSON.stringify(exception.response.data)}`
-      //   message = exception.message
+    } else if (exception instanceof AxiosError) {
+      status = HttpStatus.BAD_REQUEST
+      error = exception.name + ` ${JSON.stringify(exception.response?.data)}`
+      message = exception.message
     } else {
       status = HttpStatus.INTERNAL_SERVER_ERROR
       error = 'Critical internal error.'

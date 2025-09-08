@@ -45,8 +45,8 @@ export class AuthService {
 
   private async generateTokens(user: IUser): Promise<ILoginResponse> {
     const [access_token, refresh_token] = await Promise.all([
-      this.jwtService.signToken({ user_id: user.id, role: user.role }, EnumJwtType.ACCESS),
-      this.jwtService.signToken({ user_id: user.id }, EnumJwtType.REFRESH),
+      this.jwtService.signToken({ id: user.id, role: user.role }, EnumJwtType.ACCESS),
+      this.jwtService.signToken({ id: user.id }, EnumJwtType.REFRESH),
     ])
     await this.updateRefreshToken(user.id, refresh_token)
     return {

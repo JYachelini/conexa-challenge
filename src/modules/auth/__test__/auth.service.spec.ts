@@ -64,11 +64,8 @@ describe('AuthService', () => {
         role: true,
       })
       expect(argon2.verify).toHaveBeenCalledWith(mockUser.password, password)
-      expect(jwtService.signToken).toHaveBeenCalledWith(
-        { user_id: mockUser.id, role: mockUser.role },
-        EnumJwtType.ACCESS,
-      )
-      expect(jwtService.signToken).toHaveBeenCalledWith({ user_id: mockUser.id }, EnumJwtType.REFRESH)
+      expect(jwtService.signToken).toHaveBeenCalledWith({ id: mockUser.id, role: mockUser.role }, EnumJwtType.ACCESS)
+      expect(jwtService.signToken).toHaveBeenCalledWith({ id: mockUser.id }, EnumJwtType.REFRESH)
       expect(jwtService.signToken).toHaveBeenCalledTimes(2)
       expect(userService.updateRefreshToken).toHaveBeenCalledWith(mockUser.id, mockUser.refresh_token_hash)
     })
@@ -103,11 +100,8 @@ describe('AuthService', () => {
         refresh_token_hash: true,
       })
       expect(argon2.verify).toHaveBeenCalledWith(mockUser.refresh_token_hash, mockJwtToken.refresh_token)
-      expect(jwtService.signToken).toHaveBeenCalledWith(
-        { user_id: mockUser.id, role: mockUser.role },
-        EnumJwtType.ACCESS,
-      )
-      expect(jwtService.signToken).toHaveBeenCalledWith({ user_id: mockUser.id }, EnumJwtType.REFRESH)
+      expect(jwtService.signToken).toHaveBeenCalledWith({ id: mockUser.id, role: mockUser.role }, EnumJwtType.ACCESS)
+      expect(jwtService.signToken).toHaveBeenCalledWith({ id: mockUser.id }, EnumJwtType.REFRESH)
       expect(jwtService.signToken).toHaveBeenCalledTimes(2)
       expect(userService.updateRefreshToken).toHaveBeenCalledWith(mockUser.id, mockUser.refresh_token_hash)
     })
