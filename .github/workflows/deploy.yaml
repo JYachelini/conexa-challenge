@@ -25,6 +25,7 @@ jobs:
           find src -type f -name "*.ts" | grep -E "(database|app)" | sort
           echo "=== Database module files ==="
           ls -la src/modules/database/ || echo "database directory not found"
+          ls
           echo "=== TypeScript config ==="
           cat tsconfig.json
 
