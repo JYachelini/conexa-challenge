@@ -8,6 +8,7 @@ import { ConfigModule } from '../config/config.module'
 @Module({
   imports: [ConfigModule, JwtModule.register({})],
   providers: [AuthService, JwtService],
+  exports: [JwtService],
   controllers: [AuthController],
 })
 export class AuthModule {}

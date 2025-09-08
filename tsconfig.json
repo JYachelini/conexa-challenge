@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "stric": true,
+    "strict": true,
     "module": "nodenext",
     "esModuleInterop": true,
     "moduleResolution": "nodenext",
