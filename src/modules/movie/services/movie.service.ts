@@ -45,6 +45,7 @@ export class MovieService {
       return movie
     }
 
+    if (!movie.external_id) return movie
     const fetchedMovie = await this.findMovieFromApi(movie.external_id)
     return {
       ...fetchedMovie.properties,
