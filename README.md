@@ -29,6 +29,8 @@ Docker levanta los contenedores de la DB (PostgreSQL) y la API.
 # Levantar API
 
 
+
+
 # CI/CD 
 
 CI/CD implementado con vercel y github actions.
