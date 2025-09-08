@@ -8,7 +8,7 @@ export class EnvironmentVariables {
 
   @IsNotEmpty()
   @IsString()
-  VERCEL_GIT_PULL_REQUEST_ID: string
+  APP_VERSION: string
 
   @IsNotEmpty()
   @IsString()
